@@ -4,6 +4,7 @@
 var buttons = ['greenBtn','redBtn','yellowBtn','blueBtn'];
 var sequence = [];
 var counter = 0;
+var clickIndex = 0;
 var gameActive = false;
 var strict = false;
 var winThreshold = 20;
@@ -63,23 +64,70 @@ function playBeep(selectedBtn) {
   new Audio(baseUrl + audio[selectedBtn]).play();
 }
 
+// Reset any existing simon sequences and counters to 0 and remove any visual
+// indicators of progress
+function gameReset() {
+  sequence = [];
+  $('#count').html(sequence.length);
+  clickIndex = 0;
+  gameActive = true;
+  generateMove();
+}
+
+// Create and add a new move to the sequence
+function generateMove() {
+  var nextMove = Math.floor(Math.random()*4);
+  console.log("Making next move at index: " + nextMove);
+  sequence.push(nextMove);
+}
+
+// Visually and audibly display the sequence to the player
+function playSequence() {
+  // Create an interval which evaluates every 600ms (encapsulates the 500ms of the blink/audio)
+  var interval = setInterval(function() {
+    // console.log(counter);
+    // console.log(sequence.length);
+    if (counter < sequence.length) {
+      console.log("Playing sequence at: " + sequence[counter]);
+      var currButton = $('#' + buttons[sequence[counter]]);
+      // Index 0 of the returned object is the actual DOM object
+      lightButton(currButton[0]);
+      counter++;
+    } else {
+      counter = 0;
+      clearInterval(interval);
+    }
+  }, 600);
+
+  // for (var i = 0; i < sequence.length; i++) {
+  //   console.log("Playing sequence at: " + sequence[i]);
+  //   var currButton = $('#' + buttons[sequence[i]]);
+  //   lightButton(currButton[0]);
+  //   // setTimeout(function() {
+  //   //   // Index 0 of the returned object is the actual DOM object
+  //   //   lightButton(currButton[0]);
+  //   // }, 500);
+  // }
+}
+
 $(document).ready(function() {
   $('#start').click(function() {
     $('#start').addClass('unclickable');
     // Reset game
-    sequence = [];
-
+    gameReset();
+    playSequence();
     // Generate and do first move steps
-    var firstMove = Math.floor(Math.random()*4);
-    console.log("Starting game at index: " + firstMove);
-    // Put this first value in the sequence
-    sequence.push(firstMove);
+    // var firstMove = Math.floor(Math.random()*4);
+    // console.log("Starting game at index: " + firstMove);
+    // // Put this first value in the sequence
+    // sequence.push(firstMove);
+    // generateMove();
     // Show the first move visibly to the user
     // console.log(buttons[firstMove]);
-    var firstButton = $('#' + buttons[firstMove]);
+    // var firstButton = $('#' + buttons[sequence[0]]);
     // Index 0 of the returned object is the actual DOM object
     // console.log(firstButton[0]);
-    lightButton(firstButton[0]);
+    // lightButton(firstButton[0]);
 
     $('#count').html(sequence.length);
 
@@ -90,7 +138,62 @@ $(document).ready(function() {
 
   $('.simonButton').click(function() {
     console.log(this);
-    lightButton(this);
+    // console.log(sequence);
+    // console.log(sequence[clickIndex]);
+    // console.log(buttons[sequence[clickIndex]]);
+    // console.log(this.id);
+    // lightButton(this);
+
+    // If user selects the correct button at this point in the sequence and has now won the game
+
+    // If user selects the correct button at this point in the sequence and at the end of the sequence
+    if (gameActive && buttons[sequence[clickIndex]] === this.id && (clickIndex + 1) === sequence.length) {
+      // alert("Correct!");
+      lightButton(this);
+      // Generate a new move and reset player progress
+      generateMove();
+      clickIndex = 0;
+
+      // Display the new sequence...
+      console.log("Positon in sequence should now be: " + clickIndex);
+      console.log("Number of moves/count is now: " + sequence.length);
+      console.log(sequence);
+      $('#count').html(sequence.length);
+      setTimeout(function() {
+        playSequence();
+      }, 500);
+
+    }
+    // If user selects the correct button at this point in the sequence but isn't at the end of the sequence yet
+    else if (gameActive && buttons[sequence[clickIndex]] === this.id) {
+      lightButton(this);
+      clickIndex++;
+      console.log("Index: " + clickIndex);
+      console.log("Length: " + sequence.length);
+    }
+    // ... If user selects incorrect button while in normal mode
+    else if (gameActive && !strict) {
+      lightButton(this);
+      alert("Oops! Close this box to view the correct order and try again!");
+      clickIndex = 0;
+      // Replay sequence here
+      setTimeout(function() {
+        playSequence();
+      }, 500);
+    }
+    // ... If user selects incorrect button while in strict mode
+    else if (gameActive && strict) {
+      lightButton(this);
+      alert("Oops! Strict mode is active, time to start from scratch!");
+      // Begin new game here
+      gameReset();
+      setTimeout(function() {
+        playSequence();
+      }, 500);
+    }
+    // Otherwise game isn't active, have no response
+    console.log(sequence);
+
 //     var currColor = '';
 //     var lightColor = '';
 
@@ -123,4 +226,10 @@ $(document).ready(function() {
 //       console.log("Removing lighter colors");
 //     }, 500);
    });
+
+  // Toggle state of strict for now until we get a real toggle button created
+  $('#strict').click(function() {
+    strict = !strict;
+    console.log("Strict mode is now: " + strict);
+  });
 });
