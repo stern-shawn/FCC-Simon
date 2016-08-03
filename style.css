@@ -1,0 +1,84 @@
+.simonContainer, .gameInfo {
+  width: 300px;
+  margin: auto;
+}
+
+.simonButton {
+  height: 150px;
+  border: 1px solid #000;
+}
+
+.red{
+  background-color : #9f0f17;
+}
+
+.green{
+  background-color : #00a74a;
+}
+
+.yellow{
+  background-color : #cca707;
+}
+
+.blue{
+  background-color : #094a8f;
+}
+
+.yellowLight{
+  background-color : #fed93f;
+}
+
+.blueLight{
+  background-color : #1c8cff;
+}
+
+.redLight{
+  background-color : #ff4c4c;
+}
+
+.greenLight{
+  background-color : #13ff7c;
+}
+
+/* use pointer-events css to make an item non-interactive for duration of animations, etc 
+.clickable {
+  pointer-events : auto;
+  cursor:pointer;
+} */
+
+.unclickable {
+  pointer-events : none;
+}
+
+/* Generic Footer CSS for my "brand" */
+#contact, #copyright {
+  text-align: center;
+  color: #222;
+}
+
+.contactList {
+  list-style: none;
+  padding: 0px;
+}
+
+.contactList li {
+  margin: 10px;
+  display: inline-block;
+}
+
+.contactList li i { 
+  padding: 5px;
+  color: #222;
+  text-shadow: 1px 1px 1px #000;
+}
+
+.fa-facebook:hover, .fa-linkedin:hover, .fa-fire:hover, .fa-github:hover, .fa-instagram:hover {
+    color: #F78536;
+}
+
+.ender {
+  background-color: #EEE;
+  border-radius: 10px;
+  padding: 10px;  
+  margin: 10px auto auto auto; 
+}
