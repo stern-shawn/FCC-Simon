@@ -1,4 +1,5 @@
-.simonContainer, .gameInfo {
+.simonContainer,
+.gameInfo {
   width: 300px;
   margin: 20px auto auto auto;
 }
@@ -40,6 +41,7 @@
   background-color: #13ff7c;
 }
 
+
 /* use pointer-events css to make an item non-interactive for duration of animations, etc
 .clickable {
   pointer-events : auto;
@@ -50,8 +52,11 @@
   pointer-events: none;
 }
 
+
 /* Generic Footer CSS for my "brand" */
-#contact, #copyright {
+
+#contact,
+#copyright {
   text-align: center;
   color: #222;
 }
@@ -72,8 +77,12 @@
   text-shadow: 1px 1px 1px #000;
 }
 
-.fa-facebook:hover, .fa-linkedin:hover, .fa-fire:hover, .fa-github:hover, .fa-instagram:hover {
-    color: #F78536;
+.fa-facebook:hover,
+.fa-linkedin:hover,
+.fa-fire:hover,
+.fa-github:hover,
+.fa-instagram:hover {
+  color: #F78536;
 }
 
 .ender {
