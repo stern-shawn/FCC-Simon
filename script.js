@@ -8,7 +8,8 @@ var gameActive = false;
 var strict = false;
 var winThreshold = 20;
 
-// Illuminate the given button for 500ms and return to original state afterwards. Button is not interative for the duration.
+// Illuminate the given button for 500ms and return to original state
+// afterwards. Button is not interative for the duration.
 // Input is expected to be the DOM object for a simonButton
 function lightButton(selected) {
   $(selected).addClass('unclickable');
@@ -21,22 +22,18 @@ function lightButton(selected) {
 
   switch (selected.id) {
     case 'greenBtn':
-      currColor = 'green';
       lightColor = 'greenLight';
       btnIndex = 0;
       break;
     case 'redBtn':
-      currColor = 'red';
       lightColor = 'redLight';
       btnIndex = 1;
       break;
     case 'yellowBtn':
-      currColor = 'yellow';
       lightColor = 'yellowLight';
       btnIndex = 2;
       break;
     case 'blueBtn':
-      currColor = 'blue';
       lightColor = 'blueLight';
       btnIndex = 3;
       break;
@@ -47,15 +44,14 @@ function lightButton(selected) {
   // Play the beep for this button
   playBeep(btnIndex);
 
-  // Note to self, 'this' within setTimeout refers to window by default, use a variable to store the correct 'this' and pass it!
+  // Note to self, 'this' within setTimeout refers to window by default, use a
+  // variable to store the correct 'this' and pass it!
   // var that = this;
   // Wait 500ms then return button to darkened state
   setTimeout(function() {
     $(selected).removeClass(lightColor).removeClass('unclickable');
     console.log("Removing lighter colors");
   }, 500);
-
-  
 }
 
 // Play a beep assosciated with each unique button
@@ -82,7 +78,7 @@ $(document).ready(function() {
     // Show the first move visibly to the user
     // console.log(buttons[firstMove]);
     var firstButton = $('#' + buttons[firstMove]);
-    // Index 0 of the returned object is the actual DOM object we can play with...
+    // Index 0 of the returned object is the actual DOM object
     // console.log(firstButton[0]);
     lightButton(firstButton[0]);
 
