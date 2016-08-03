@@ -14,7 +14,6 @@ var winThreshold = 20;
 function lightButton(selected) {
   $(selected).addClass('unclickable');
 
-  var currColor = '';
   var lightColor = '';
   var btnIndex = 0;
 
