@@ -9,35 +9,35 @@
 }
 
 .red {
-  background-color : #9f0f17;
+  background-color: #9f0f17;
 }
 
 .green {
-  background-color : #00a74a;
+  background-color: #00a74a;
 }
 
 .yellow {
-  background-color : #cca707;
+  background-color: #cca707;
 }
 
 .blue {
-  background-color : #094a8f;
+  background-color: #094a8f;
 }
 
 .yellowLight {
-  background-color : #fed93f;
+  background-color: #fed93f;
 }
 
 .blueLight {
-  background-color : #1c8cff;
+  background-color: #1c8cff;
 }
 
 .redLight {
-  background-color : #ff4c4c;
+  background-color: #ff4c4c;
 }
 
 .greenLight {
-  background-color : #13ff7c;
+  background-color: #13ff7c;
 }
 
 /* use pointer-events css to make an item non-interactive for duration of animations, etc
@@ -47,7 +47,7 @@
 } */
 
 .unclickable {
-  pointer-events : none;
+  pointer-events: none;
 }
 
 /* Generic Footer CSS for my "brand" */
